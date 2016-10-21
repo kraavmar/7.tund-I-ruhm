@@ -6,7 +6,7 @@
 	if (isset($_SESSION["userId"])){
 		
 		//suunan sisselogimise lehele
-		header("Location: data.php");
+		header("Location: user.php");
 		exit();
 		
 	}
@@ -27,6 +27,7 @@
 	$signupPasswordError = "";
 	$signupEmail = "";
 	$signupGender = "";
+	$loginEmail = " ";
 	
 
 	// on üldse olemas selline muutja
@@ -118,7 +119,8 @@
 		!empty($_POST["loginEmail"]) && 
 		!empty($_POST["loginPassword"])
 	  ) {
-		  
+		
+		$loginEmail = $_POST["loginEmail"];
 		$error = login(cleanInput($_POST["loginEmail"]), cleanInput($_POST["loginPassword"]));
 		
 	}

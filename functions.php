@@ -1,6 +1,6 @@
 <?php
 
-	require("../../../config.php");
+	require("../../config.php");
 	// functions.php
 	//var_dump($GLOBALS);
 	
@@ -14,7 +14,7 @@
 	
 	function signUp ($email, $password) {
 		
-		$database = "if16_romil";
+		$database = "if16_marikraav";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 
 		$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUES (?, ?)");
@@ -39,7 +39,7 @@
 		
 		$error = "";
 		
-		$database = "if16_romil";
+		$database = "if16_marikraav";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 
 		$stmt = $mysqli->prepare("
@@ -95,7 +95,7 @@
 	
 	function saveCar ($plate, $color) {
 		
-		$database = "if16_romil";
+		$database = "if16_marikraav";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 
 		$stmt = $mysqli->prepare("INSERT INTO cars_and_colors (plate, color) VALUES (?, ?)");
@@ -118,7 +118,7 @@
 	
 	function getAllCars() {
 		
-		$database = "if16_romil";
+		$database = "if16_marikraav";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		
 		$stmt = $mysqli->prepare("
@@ -168,7 +168,7 @@
 	
 	function saveInterest ($interest) {
 		
-		$database = "if16_romil";
+		$database = "if16_marikraav";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 
 		$stmt = $mysqli->prepare("INSERT INTO interests (interest) VALUES (?)");
@@ -193,13 +193,13 @@
 		echo "huviala: ".$interest_id."<br>";
 		echo "kasutaja: ".$_SESSION["userId"]."<br>";
 		
-		$database = "if16_romil";
+		$database = "if16_marikraav";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 
 		//kas on juba olemas
 		
 		$stmt = $mysqli->prepare("
-			SELECT id FROM user_interests_1 
+			SELECT id FROM user_interests 
 			WHERE user_id=? AND interest_id=?
 		");
 		$stmt->bind_param("ii", $_SESSION["userId"], $interest_id);
@@ -217,7 +217,7 @@
 		// jätkan salvestamisega...
 		
 		$stmt = $mysqli->prepare("
-			INSERT INTO user_interests_1 
+			INSERT INTO user_interests 
 			(user_id, interest_id) VALUES (?, ?)
 		");
 	
@@ -238,7 +238,7 @@
 	
 	function getAllInterests() {
 		
-		$database = "if16_romil";
+		$database = "if16_marikraav";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		
 		$stmt = $mysqli->prepare("
@@ -275,15 +275,15 @@
 	
 	function getAllUserInterests() {
 		
-		$database = "if16_romil";
+		$database = "if16_marikraav";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $database);
 		
 		$stmt = $mysqli->prepare("
 			SELECT interest
 			FROM interests
-			JOIN user_interests_1
-			ON interests.id = user_interests_1.interest_id
-			WHERE user_interests_1.user_id = ?
+			JOIN user_interests
+			ON interests.id = user_interests.interest_id
+			WHERE user_interests.user_id = ?
 		");
 		echo $mysqli->error;
 		

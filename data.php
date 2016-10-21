@@ -44,7 +44,7 @@
 	//var_dump($carData);
 	//echo "</pre>";
 ?>
-<h1>Data</h1>
+<h1>Data </a></h1>
 <?=$msg;?>
 <p>
 	Tere tulemast <a href="user.php"><?=$_SESSION["userEmail"];?>!</a>
